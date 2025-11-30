@@ -4508,3 +4508,61 @@ text-component {
   }
 }
 
+.nav-item {
+  position: relative;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid #eee;
+  top: 100%;
+  left: 0;
+  min-width: 160px;
+}
+
+.nav-item:hover .submenu {
+  display: block;
+}
+
+.submenu a {
+  display: block;
+  padding: 4px 0;
+  color: var(--header-text-color, #333);
+  text-decoration: none;
+}
+
+.submenu a:hover {
+  color: #007aff;
+}
+
+/* Make header sticky */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50; /* above content */
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease,
+    padding 0.2s ease,
+    background-color 0.2s ease;
+}
+
+/* When the page is scrolled */
+.site-header.is-sticky {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Optional: shrink padding when sticky */
+.site-header.is-sticky .site-header__inner {
+  padding-block: 10px;
+}
+
+/* Optional: hide header when scrolling down (JS will toggle this) */
+.site-header.is-hidden {
+  transform: translateY(-100%);
+}
+
+

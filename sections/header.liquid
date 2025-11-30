@@ -1,10 +1,12 @@
 {% assign layout = section.settings.layout | default: 'logo-left' %}
 
-<header class="site-header"
-style="
+<header
+  class="site-header"
+  data-sticky-header
+  style="
     background-color: {{ section.settings.bg_color | default: '#ffffff' }};
     --header-text-color: {{ section.settings.text_color | default: '#333333' }};
-"
+  "
 >
   {% if section.settings.show_announcement and section.settings.announcement_text != blank %}
     <div class="site-header__announcement">
@@ -45,7 +47,15 @@ style="
       {% assign menu_handle = section.settings.menu | default: 'main-menu' %}
       {% if linklists[menu_handle] %}
         {% for link in linklists[menu_handle].links %}
-          <a href="{{ link.url }}">{{ link.title }}</a>
+          {{ link.title }}
+          <!-- This is a submenu -->
+          <ul class="submenu">
+            {% for sub in link.links %}
+              <li>
+                <a href="{{ sub.url }}">{{ sub.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
         {% endfor %}
       {% endif %}
     </nav>
@@ -64,6 +74,12 @@ style="
     </div>
   </div>
 </header>
+
+<script>
+  console.log("Hello from JS!");
+</script>
+
+<script type="module" src="{{ '/custom/header.js' | asset_url }}"></script>
 
 {% schema %}
 {

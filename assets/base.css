@@ -4296,3 +4296,215 @@ text-component {
     font-size: max(1rem, 100%);
   }
 }
+
+/* ========== HEADER ========== */
+
+.site-header {
+  border-bottom: 1px solid #eee;
+  background: #fff;
+}
+
+.site-header__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* Logo */
+.site-header__logo img {
+  max-height: 40px;
+  width: auto;
+}
+
+/* Desktop nav */
+.site-header__nav {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+  justify-content: center;
+}
+
+.site-header__nav a {
+  text-decoration: none;
+  color: var(--header-text-color, #333333);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.site-header__nav a:hover {
+  color: #007aff;
+}
+
+/* Actions (search, account, cart) */
+.site-header__actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.site-header__icon {
+  text-decoration: none;
+  font-size: 18px;
+  color: var(--header-text-color, #333333);
+}
+
+/* Mobile toggle base */
+.site-header__checkbox {
+  display: none;
+}
+
+.site-header__toggle {
+  display: none; /* hidden on desktop */
+  width: 28px;
+  height: 22px;
+  flex-shrink: 0;
+  cursor: pointer;
+  position: relative;
+}
+
+.site-header__toggle span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--header-text-color, #333333);
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease, top 0.2s ease, bottom 0.2s ease;
+}
+
+.site-header__toggle span:nth-child(1) {
+  top: 0;
+}
+.site-header__toggle span:nth-child(2) {
+  top: 9px;
+}
+.site-header__toggle span:nth-child(3) {
+  bottom: 0;
+}
+
+/* When checked – animate into X */
+.site-header__checkbox:checked + .site-header__toggle span:nth-child(1) {
+  top: 9px;
+  transform: rotate(45deg);
+}
+.site-header__checkbox:checked + .site-header__toggle span:nth-child(2) {
+  opacity: 0;
+}
+.site-header__checkbox:checked + .site-header__toggle span:nth-child(3) {
+  bottom: 9px;
+  transform: rotate(-45deg);
+}
+
+/* ========== MOBILE STYLES ========== */
+@media (max-width: 768px) {
+  .site-header__inner {
+    padding-inline: 16px;
+    gap: 12px;
+  }
+
+  /* show hamburger, move things around */
+  .site-header__toggle {
+    display: block;
+  }
+
+  .site-header__nav {
+    position: absolute;
+    top: 64px; /* just below header */
+    left: 0;
+    right: 0;
+    background: #fff;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 20px;
+    gap: 10px;
+    border-top: 1px solid #eee;
+    transform: translateY(-10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .site-header__nav a {
+    font-size: 16px;
+  }
+
+  /* show nav when checkbox is checked */
+  .site-header__checkbox:checked ~ .site-header__nav {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* keep layout: logo | burger | icons */
+  .site-header__inner {
+    justify-content: space-between;
+  }
+
+  .site-header__nav {
+    flex: 0;
+  }
+}
+.site-header__announcement {
+  background: #111;
+  color: #fff;
+  text-align: center;
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+/* ========== LAYOUT VARIANTS (DESKTOP) ========== */
+@media (min-width: 769px) {
+  /* Default (logo-left) just uses existing flex layout */
+  .site-header__inner--logo-left {
+    justify-content: space-between;
+  }
+
+  /* Logo centered, nav left, actions right */
+  .site-header__inner--logo-center {
+    justify-content: center;
+  }
+
+  .site-header__inner--logo-center .site-header__logo {
+    order: 2;
+    flex: 0 0 auto;
+    text-align: center;
+  }
+
+  .site-header__inner--logo-center .site-header__nav {
+    order: 1;
+    justify-content: flex-start;
+    flex: 1;
+  }
+
+  .site-header__inner--logo-center .site-header__actions {
+    order: 3;
+    justify-content: flex-end;
+    flex: 1;
+  }
+
+  /* Logo on the right, nav left, actions in middle */
+  .site-header__inner--logo-right {
+    justify-content: space-between;
+  }
+
+  .site-header__inner--logo-right .site-header__logo {
+    order: 3;
+  }
+
+  .site-header__inner--logo-right .site-header__nav {
+    order: 1;
+    justify-content: flex-start;
+    flex: 1;
+  }
+
+  .site-header__inner--logo-right .site-header__actions {
+    order: 2;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+}
+
